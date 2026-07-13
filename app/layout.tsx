@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "Coffer",
-  description: "A shared archive of obscure things worth knowing about.",
+  description: "Web repository to explore different media across the Internet through user contributions.",
 };
 
 export default function RootLayout({ children }) {
@@ -12,6 +12,20 @@ export default function RootLayout({ children }) {
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap"
           rel="stylesheet"
+        />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+            `,
+          }}
         />
       </head>
       <body>
