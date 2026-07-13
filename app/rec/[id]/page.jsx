@@ -10,7 +10,7 @@ export default function RecPage({ params }) {
 
   useEffect(() => {
     async function fetchRec() {
-      const res = await fetch(`http://localhost:4000/api/recs/${id}`);
+      const res = await fetch(`/api/recs/${id}`);
       const data = await res.json();
       setRec(data.rec);
       setLoading(false);

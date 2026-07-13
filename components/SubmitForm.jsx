@@ -25,18 +25,18 @@ export default function SubmitForm({ onSuccess }) {
     description: "",
     link: "",
   });
-  const [status, setStatus] = useState(null); // null | 'loading' | 'success' | 'error' | 'duplicate'
+  const [status, setStatus] = useState(null); 
   const [error, setError] = useState(null);
   const [duplicate, setDuplicate] = useState(null);
-  const [linkStatus, setLinkStatus] = useState(null); // null | 'checking' | 'valid' | 'invalid'
+  const [linkStatus, setLinkStatus] = useState(null); // null 'checking' 'valid'  'invalid'
   const [ogPreview, setOgPreview] = useState(null);
 
-  // get or create browser ID on mount
+  // browser ID on mount
   useEffect(() => {
     setUserId(getOrCreateUserId());
   }, []);
 
-  // validate link as user types
+  // validate link 
   useEffect(() => {
     if (!form.link) {
       setLinkStatus(null);
@@ -48,7 +48,7 @@ export default function SubmitForm({ onSuccess }) {
       setLinkStatus("checking");
       try {
         const res = await fetch(
-          `http://localhost:4000/api/og?url=${encodeURIComponent(form.link)}`
+          `/api/og?url=${encodeURIComponent(form.link)}`
         );
         const data = await res.json();
 
@@ -62,7 +62,7 @@ export default function SubmitForm({ onSuccess }) {
       } catch {
         setLinkStatus("invalid");
       }
-    }, 800); // wait 800ms after user stops typing before checking
+    }, 800); 
 
     return () => clearTimeout(timer);
   }, [form.link]);
@@ -78,7 +78,7 @@ export default function SubmitForm({ onSuccess }) {
     setDuplicate(null);
 
     try {
-      const res = await fetch("http://localhost:4000/api/recs", {
+      const res = await fetch("/api/recs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, user_id: userId }),
@@ -87,7 +87,6 @@ export default function SubmitForm({ onSuccess }) {
       const data = await res.json();
 
       if (res.status === 409) {
-        // duplicate detected
         setStatus("duplicate");
         setDuplicate(data);
         return;
@@ -105,6 +104,7 @@ export default function SubmitForm({ onSuccess }) {
         category: "music",
         submitter_name: "",
         description: "",
+        one_word: "",
         link: "",
       });
       setOgPreview(null);
@@ -117,7 +117,7 @@ export default function SubmitForm({ onSuccess }) {
 
   return (
     <div style={styles.panel}>
-      <p style={styles.panelLabel}>Add a reccomendation</p>
+      <p style={styles.panelLabel}>Add a recommendation</p>
 
       <form onSubmit={handleSubmit}>
         {/* Name + Category row */}
@@ -151,7 +151,7 @@ export default function SubmitForm({ onSuccess }) {
 
         {/* Title */}
         <div style={styles.formRow}>
-          <label style={styles.label}>Title - Author</label>
+          <label style={styles.label}>Title - Creator</label>
           <input
             style={styles.input}
             name="title"

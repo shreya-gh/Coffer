@@ -10,7 +10,7 @@ export default function MyRecsPage() {
 
   useEffect(() => {
     const userId = getOrCreateUserId();
-    fetch(`http://localhost:4000/api/recs/user/${userId}`)
+    fetch(`/api/recs/user/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         setRecs(data.recs || []);
@@ -20,10 +20,10 @@ export default function MyRecsPage() {
 
   return (
     <main style={styles.main}>
-      <a href="/" style={styles.back}>← back to coffer</a>
+      <a href="/" style={styles.back}>← Home </a>
 
       <div style={styles.header}>
-        <h1 style={styles.title}>My Submissions</h1>
+        <h1 style={styles.title}>Personal Library</h1>
         <p style={styles.count}>
           {loading ? "..." : `${recs.length} rec${recs.length !== 1 ? "s" : ""}`}
         </p>
@@ -36,23 +36,12 @@ export default function MyRecsPage() {
           <p style={styles.empty}>
             you haven't added anything yet —{" "}
             <a href="/" style={{ color: "var(--gold)" }}>
-              add your first rec
+              add your first entry
             </a>
           </p>
         ) : (
           recs.map((rec) => (
-            <div key={rec.id} style={styles.recWrapper}>
-              <RecCard rec={rec} />
-              <span style={
-                rec.status === "approved"
-                  ? styles.statusApproved
-                  : rec.status === "rejected"
-                  ? styles.statusRejected
-                  : styles.statusPending
-              }>
-                {rec.status}
-              </span>
-            </div>
+            <RecCard key={rec.id} rec={rec} />
           ))
         )}
       </div>

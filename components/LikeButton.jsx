@@ -10,7 +10,7 @@ export default function LikeButton({ recId }) {
 
   useEffect(() => {
     const userId = getOrCreateUserId();
-    fetch(`http://localhost:4000/api/likes/${recId}?user_id=${userId}`)
+    fetch(`/api/likes/${recId}?user_id=${userId}`)
       .then((res) => res.json())
       .then((data) => {
         setCount(data.count);
@@ -23,7 +23,7 @@ export default function LikeButton({ recId }) {
     setLoading(true);
 
     const userId = getOrCreateUserId();
-    const res = await fetch("http://localhost:4000/api/likes", {
+    const res = await fetch("http:///api/api/likes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ rec_id: recId, user_id: userId }),

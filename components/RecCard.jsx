@@ -10,7 +10,7 @@ export default function RecCard({ rec }) {
   useEffect(() => {
     const userId = getOrCreateUserId();
     fetch(
-      `http://localhost:4000/api/likes/${rec.id}?user_id=${userId}`
+      `/api/likes/${rec.id}?user_id=${userId}`
     )
       .then((res) => res.json())
       .then((data) => setCount(data.count));

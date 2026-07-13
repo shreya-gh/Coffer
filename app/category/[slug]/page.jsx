@@ -20,6 +20,11 @@ export default function CategoryPage({ params }) {
   const { slug } = use(params);
   const [recs, setRecs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const theme = slug ? (categoryThemes[slug] || categoryThemes.other) : categoryThemes.other;
 
   if (!slug) return null;
@@ -27,8 +32,8 @@ export default function CategoryPage({ params }) {
   useEffect(() => {
     async function fetchRecs() {
       const res = await fetch(
-        `http://localhost:4000/api/recs?category=${slug}`
-      );
+  `${window.location.origin}/api/recs?category=${slug}`
+);
       const data = await res.json();
       setRecs(data.recs || []);
       setLoading(false);
@@ -51,7 +56,7 @@ export default function CategoryPage({ params }) {
         overflowY: "auto",
       }}>
         <a href="/" style={{ ...styles.back, color: theme.accent }}>
-          ← back to coffer
+          ← Home 
         </a>
 
         <div style={{ ...styles.header, borderBottom: `1px solid ${theme.accent}` }}>
@@ -91,18 +96,20 @@ export default function CategoryPage({ params }) {
         position: "sticky",
         top: "0",
       }}>
-        <blockquote style={{
-          fontFamily: "Playfair Display, serif",
-          fontSize: "24px",
-          lineHeight: "1.7",
-          color: theme.text,
-          textAlign: "center",
-          maxWidth: "400px",
-          fontStyle: "italic",
-          opacity: 0.9,
-        }}>
-          {theme.quote}
-        </blockquote>
+        {mounted && (
+          <blockquote style={{
+            fontFamily: "Playfair Display, serif",
+            fontSize: "24px",
+            lineHeight: "1.7",
+            color: theme.text,
+            textAlign: "center",
+            maxWidth: "400px",
+            fontStyle: "italic",
+            opacity: 0.9,
+          }}>
+            {theme.quote}
+          </blockquote>
+        )}
       </div>
     </main>
   );
