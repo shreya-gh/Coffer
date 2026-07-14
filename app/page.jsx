@@ -42,7 +42,7 @@ const styles = {
     backgroundSize: "cover",
     backgroundAttachment: "fixed",
     backgroundRepeat: "no-repeat",
-    height: "calc(100vh - 50px)",
+    height: "calc(100dvh - 50px)",
     overflow: "hidden",
   },
   main: {
@@ -100,7 +100,7 @@ const styles = {
     border: "var(--rule)",
     boxShadow: "4px 4px 24px rgba(0,0,0,0.12)",
     zIndex: 10,
-    maxHeight: "90vh",
+    maxHeight: "90dvh",
     overflowY: "auto",
   },
   quoteCard: {

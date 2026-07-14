@@ -45,14 +45,14 @@ export default function CategoryPage({ params }) {
     <main style={{
       ...styles.main,
       background: theme.bg,
-      height: "100vh",
+      height: "100dvh",
       overflow: "hidden",
     }}>
       {/* Left half — recs */}
       <div style={{
         padding: "48px 32px",
         borderRight: `1px solid ${theme.accent}44`,
-        height: "100vh",
+        height: "100dvh",
         overflowY: "auto",
       }}>
         <a href="/" style={{ ...styles.back, color: theme.accent }}>
@@ -92,7 +92,7 @@ export default function CategoryPage({ params }) {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        height: "100vh",
+        height: "100dvh",
         position: "sticky",
         top: "0",
       }}>
@@ -118,7 +118,7 @@ export default function CategoryPage({ params }) {
 const styles = {
   main: {
     padding: "0",
-    minHeight: "100vh",
+    minHeight: "100dvh",
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
   },
